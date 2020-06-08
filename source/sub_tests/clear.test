@@ -1,0 +1,18 @@
+TEST_CASE("clears the list", "[clear]"){
+List<int> list1{};
+list1.push_back(30);
+list1.push_front(40);
+list1.clear();
+REQUIRE(list1.empty() == true);
+
+
+List<int> list2{};//1 element
+  list2.push_back(10);
+  list2.clear();
+  REQUIRE(list2.empty() == true);
+  
+List<int> list3{};//no element
+  list3.clear();
+  REQUIRE(list3.empty() == true);
+
+}

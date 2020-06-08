@@ -135,6 +135,9 @@ class List {
 
 
     // test and implement:
+    List(List const&) {
+
+    }
     //TODO: Copy-Konstruktor using Deep-Copy semantics (Aufgabe 3.5)
 
     // test and implement:
@@ -168,10 +171,10 @@ class List {
       // make use of operator==
     }
 
-    /* ... */
+    /* Destructor */
     ~List() {
-      //TODO: Implement via clear-Method (Aufgabe 3.4)
-    } //can not really be tested
+        clear();
+    } 
 
     /* ... */
     ListIterator<T> begin() {
@@ -187,9 +190,12 @@ class List {
       return {};
     }
 
-    /* ... */ 
-    // test and implement:
-    //TODO: clear()-Method (Aufgabe 3.4)
+    /* deletes all of the elements */ 
+    void clear() {
+        while (!empty()) {
+            pop_back();
+        }
+    }
 
 
     /* ... */
