@@ -203,50 +203,94 @@ class List {
     //TODO: member function reverse (Aufgabe 3.7 - Teil 1)
 
 
-    /* ... */
+    /*adds an element to front of the list */
     void push_front(T const& element) {
-      // TODO: push_front-method (Aufgabe 3.3)
+        ListNode<T>* n = new ListNode<T>{ element , nullptr , nullptr };
+        if (empty()) {
+            first_ = n;
+            last_ = n;
+        }
+        else {
+            n->next = first_;
+            first_->prev = n;
+            first_ = n;
+        }
+        ++size_;
     }
 
-    /* ... */
+    /*adds an element to back of the list */
     void push_back(T const& element) {
-      // TODO: push_back-method (Aufgabe 3.3)
+        ListNode<T>* n = new ListNode<T>{ element , nullptr , nullptr };
+        if (empty()) {
+            first_ = n;
+            last_ = n;
+        }
+        else {
+            n->prev = last_;
+            last_->next = n;
+            last_ = n;
+        }
+        ++size_;
+      
+
     }
 
-    /* ... */
+    /*removes an element from the front */
     void pop_front() {
-      if(empty()) {
-        throw "List is empty";
-      }
+        if (empty()) {
+            throw "List is empty";
+        }
 
-      // TODO: remainder of pop_front-method (Aufgabe 3.3)
+        else if (size() == 1) {
+            first_ = nullptr;
+            last_ = nullptr;
+            --size_;
+        }
+        else {
+            first_ = first_->next;
+            delete first_->prev;
+            first_->prev = nullptr;
+            --size_;
+        }
     }
 
-    /* ... */
+    /* removes an element from the back*/
     void pop_back() {
       if(empty()) {
         throw "List is empty";
       }
+      else if (size() == 1) {
+          first_ = nullptr;
+          last_ = nullptr;
+          --size_;
+      }
+      else {
+          last_ = last_->prev;
+          delete last_->next;
+          last_->next = nullptr;
+          --size_;
+      }
 
-      // TODO: remainder of pop_back-method (Aufgabe 3.3)
     }
 
-    /* ... */
+    /* returns a reference to the first element */
     T& front() {
       if(empty()) {
         throw "List is empty";
       }
-
-      // TODO: remainder of front-method (Aufgabe 3.3)
+      else {
+          return first_->value;
+      }
     }
 
-    /* ... */
+    /* returns a reference to the last element */
     T& back() {
       if(empty()) {
         throw "List is empty";
       }
-
-      // TODO: remainder of back-method (Aufgabe 3.3)
+      else {
+          return last_->value;
+      }
     }
 
     /* checks if the list is empty or not */
@@ -272,7 +316,7 @@ class List {
     ListNode<T>* last_;
 };
 
-/* ... */
+/* makes the elements of the list reverse*/
 //TODO: Freie Funktion reverse 
 //(Aufgabe 3.7 - Teil 2, benutzt Member-Funktion reverse)
 
