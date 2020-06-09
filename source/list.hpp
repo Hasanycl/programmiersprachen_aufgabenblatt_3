@@ -134,11 +134,17 @@ class List {
         last_{nullptr}{}
 
 
-    // test and implement:
-    List(List const&) {
+    //Copy-Konstruktor using Deep-Copy semantics
+    List(List<T> const& otherList) :List() {//if i dont do :List() i get an error which is probably because of initializing membervariables
+        ListNode<T>* n = otherList.first_;
+        for (int i = 1; i <= otherList.size(); i++) {//copies the value with push_back until the given list ends
+           push_back(n->value);
+            n = n->next;
 
+        }
+            
     }
-    //TODO: Copy-Konstruktor using Deep-Copy semantics (Aufgabe 3.5)
+    
 
     // test and implement:
     // TODO: Move-Konstruktor (Aufgabe 3.9)
@@ -149,9 +155,6 @@ class List {
     List(std::initializer_list<T> ini_list) {
       //not implemented yet
     }
-
-    // test and implement:
-    //TODO: Copy-Konstruktor using Deep-Copy semantics (Aufgabe 3.5)
 
     /* ... */
     // test and implement:
@@ -248,6 +251,8 @@ class List {
         }
 
         else if (size() == 1) {
+
+            delete first_;
             first_ = nullptr;
             last_ = nullptr;
             --size_;
@@ -266,16 +271,19 @@ class List {
         throw "List is empty";
       }
       else if (size() == 1) {
+
+          delete first_;
           first_ = nullptr;
           last_ = nullptr;
           --size_;
       }
-      else {
+      else if (size() > 1){
+      
           last_ = last_->prev;
           delete last_->next;
           last_->next = nullptr;
           --size_;
-      }
+        }
 
     }
 

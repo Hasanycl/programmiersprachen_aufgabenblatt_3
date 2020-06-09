@@ -1,0 +1,23 @@
+TEST_CASE("copies the given list", "[copy_constructor]"){
+List<int> list1{};
+list1.push_front(1);
+list1.push_front(2);
+list1.push_front(3);
+
+List<int> list2{list1};
+REQUIRE(list1.size() == 3);
+REQUIRE(list2.size() == 3);
+REQUIRE(list2.front() == 3);
+REQUIRE(list2.back() == 1);
+
+List<int> list3{list2};
+REQUIRE(list3.size() == 3);
+REQUIRE(list3.front() == 3);
+REQUIRE(list2.back() == 1);
+
+
+
+
+
+
+}
