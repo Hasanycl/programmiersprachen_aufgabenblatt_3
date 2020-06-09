@@ -4,6 +4,7 @@
 #include <cstddef>  //ptrdiff_t
 #include <iterator> //std::bidirectional_iterator_tag
 #include <iostream>
+#include <utility>
 
 #include <initializer_list>
 
@@ -156,9 +157,18 @@ class List {
       //not implemented yet
     }
 
-    /* ... */
-    // test and implement:
-    //TODO: (unifying) Assignment operator (Aufgabe 3.6)
+    //swap function
+    void swap(List& otherList) {
+        std::swap(size_, otherList.size_);
+        std::swap(first_, otherList.first_);
+        std::swap(last_, otherList.last_);
+        
+    }
+    //(unifying) Assignment operator
+    List& operator=(List otherList) {
+        swap(otherList);
+        return *this;
+    }
 
     /* ... */
     // test and implement:
