@@ -137,7 +137,7 @@ class List {
 
     //Copy-Konstruktor using Deep-Copy semantics
     List(List<T> const& otherList) :List() {//if i dont do :List() i get an error which is probably because of initializing membervariables
-        ListNode<T>* n = otherList.first_;
+        ListNode<T>* n = otherList.first_;//to track otherList
         for (int i = 1; i <= otherList.size(); i++) {//copies the value with push_back until the given list ends
            push_back(n->value);
             n = n->next;
@@ -173,13 +173,11 @@ class List {
     /* ... */
     // test and implement:
 
-    bool operator==(List const& rhs)
-    {
+    bool operator==(List const& rhs) const{
       //TODO: operator== (Aufgabe 3.8)
     }
 
-    bool operator!=(List const& rhs)
-    {
+    bool operator!=(List const& rhs) const{
       //TODO: operator!= (Aufgabe 3.8)
       // make use of operator==
     }
@@ -217,9 +215,19 @@ class List {
     /* ... */
     //TODO: member function insert (Aufgabe 3.14)
 
-    /* ... */
-
-    //TODO: member function reverse (Aufgabe 3.7 - Teil 1)
+    
+   // makes the elements of the list reverse
+    void reverse(){
+        ListNode<T>* curr = first_;//pointer curr to track current node
+        ListNode<T>* temp;
+        while (curr != nullptr) {
+            temp = curr->prev;
+            curr->prev = curr->next;
+            curr->next = temp;
+            curr = curr->prev;
+        }
+        std::swap(first_, last_);
+    }
 
 
     /*adds an element to front of the list */
@@ -340,9 +348,13 @@ class List {
     ListNode<T>* last_;
 };
 
-/* makes the elements of the list reverse*/
-//TODO: Freie Funktion reverse 
-//(Aufgabe 3.7 - Teil 2, benutzt Member-Funktion reverse)
+/* makes the elements of the list reverse(free function)*/
+template<typename T>
+List<T>* reverse( List<T> const& otherList){
+    List<T>* temp = new List<T>{ otherList};
+    temp->reverse();
+    return temp;
+}
 
 /* ... */
 //TODO: Freie Funktion operator+ (3.10 - Teil 2)
