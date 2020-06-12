@@ -170,16 +170,31 @@ class List {
         return *this;
     }
 
-    /* ... */
-    // test and implement:
-
+    //checks if two lists equal
     bool operator==(List const& rhs) const{
-      //TODO: operator== (Aufgabe 3.8)
+
+        if (this->size_ == rhs.size_) {
+            ListNode<T>* temp = first_;
+            ListNode<T>* temp1 = rhs.first_;
+            while (temp != nullptr && temp1 != nullptr) {
+
+               if (temp->value != temp->value) { return false; }//if values are not same
+
+                temp = temp->next; //move to next node
+                temp1 = temp1->next;
+            }
+            return true;
+        }
+        else {
+            return false;//if sizes are not equal
+        }
     }
 
     bool operator!=(List const& rhs) const{
-      //TODO: operator!= (Aufgabe 3.8)
-      // make use of operator==
+        if (*this == rhs) {
+            return false;
+        }
+        else { return true; }
     }
 
     /* Destructor */

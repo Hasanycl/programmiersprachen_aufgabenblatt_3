@@ -44,6 +44,9 @@ ListNode<T>* get_last_pointer(List<T> const& list_to_test) {return list_to_test.
 //test cases for reversing the list
 #include "sub_tests/reverse.test"
 
+//test cases for equality & inequality
+#include "sub_tests/equality_inequality.test"
+
 //test cases for retrieving iterators
 /*#include "sub_tests/begin.test"
 #include "sub_tests/end.test"

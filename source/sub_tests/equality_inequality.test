@@ -1,0 +1,16 @@
+TEST_CASE(" equality and inequality", "[equality & inequality]"){
+
+List<int> list;
+list.push_front(3);
+list.push_front(2);
+list.push_front(1);
+
+List<int> list2 = list;
+
+REQUIRE(list2 == list);
+list2.pop_front();
+REQUIRE(list2 != list);
+list2.push_front(1);
+REQUIRE(list2 == list);
+
+}
