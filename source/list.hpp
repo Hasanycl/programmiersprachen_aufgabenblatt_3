@@ -110,7 +110,7 @@ struct ListIterator {
 
 template <typename T>
 class List {
-  public:
+public:
 
     //friend declarations for testing the members   
     template <typename TEST_TYPE>
@@ -120,35 +120,43 @@ class List {
     template <typename TEST_TYPE>
     friend ListNode<TEST_TYPE>* get_last_pointer(List<TEST_TYPE> const& list_to_test);
 
-    using value_type      = T;
-    using pointer         = T*;
-    using const_pointer   = T const*;
-    using reference       = T&;
+    using value_type = T;
+    using pointer = T*;
+    using const_pointer = T const*;
+    using reference = T&;
     using const_reference = T const&;
-    using iterator        = ListIterator<T>;
+    using iterator = ListIterator<T>;
 
-   
+
     /* default constructor */
-    List():
-        size_{0},
-        first_{nullptr},
-        last_{nullptr}{}
+    List() :
+        size_{ 0 },
+        first_{ nullptr },
+        last_{ nullptr }{}
 
 
     //Copy-Konstruktor using Deep-Copy semantics
-    List(List<T> const& otherList) :List() {//if i dont do :List() i get an error which is probably because of initializing membervariables
+    List(List const& otherList) :List() {//if i dont do :List() i get an error which is probably because of initializing membervariables
         ListNode<T>* n = otherList.first_;//to track otherList
         for (int i = 1; i <= otherList.size(); i++) {//copies the value with push_back until the given list ends
-           push_back(n->value);
+            push_back(n->value);
             n = n->next;
 
         }
-            
-    }
-    
 
-    // test and implement:
-    // TODO: Move-Konstruktor (Aufgabe 3.9)
+    }
+
+
+    /* Move-Konstruktor
+    List(List&& rhs) :
+        size_{rhs.size_},
+        first_{ rhs.first_ },
+        last_{ rhs.last_ }{
+        rhs.size_ = 0;
+        rhs.first_ = nullptr;
+        rhs.last_ = nullptr;
+    }*/
+
 
     //TODO: Initializer-List Konstruktor (3.10 - Teil 1)
     /* ... */
@@ -202,18 +210,16 @@ class List {
         clear();
     } 
 
-    /* ... */
+    /* returns an iterator to the first element of the list */
     ListIterator<T> begin() {
-      //TODO: begin-Method returning an Iterator to the 
-      //      first element in the List (Aufgabe 3.11)
-      return {};
+
+        return ListIterator<T>{first_};
     }
 
-    /* ... */
+    /* returns an iterator to element after last element */
     ListIterator<T> end() {
-      //TODO: end-Method returning an Iterator to element after (!) 
-      //      the last element in the List (Aufgabe 3.11)
-      return {};
+
+      return ListIterator<T>{nullptr};
     }
 
     /* deletes all of the elements */ 
