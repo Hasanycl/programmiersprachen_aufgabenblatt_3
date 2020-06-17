@@ -31,67 +31,66 @@ struct ListIterator {
   using iterator_category = std::bidirectional_iterator_tag;
 
 
-  /* DESCRIPTION  operator*() */
+  //Dereferencing to access values
   T&  operator*()  const {
     if(nullptr == node) {
       throw "Iterator does not point to valid node";
     }
+    else {
+        return node->value;
+    }
+  }
 
-    //TODO: remaining implementation of derefenciation of 
-    //      iterator using operator* (Aufgabe 3.12 - Teil 1)
-
-  } //call *it
-
-  /* DESCRIPTION  operator->() */
+  //Dereferencing
   T* operator->() const {
     if(nullptr == node) {
       throw "Iterator does not point to valid node";
     }
+    else {
+        return &node->value;
+    }
+  } 
 
-    //TODO: remaining implementation of derefenciation of 
-    //      iterator using operator-> (Aufgabe 3.12 - Teil 2)
-  }  //call it->method() or it->member
 
-
-  /* PREINCREMENT, call: ++it, advances one element forward */
+  /* PREINCREMENT advances one element forward and returns it*/
   ListIterator<T>& operator++() {
     if(nullptr == node) {
       throw "Iterator does not point to valid node";
     }
-
-    //TODO: Implement Postincrement-Operation for Iterator
-    //      (Aufgabe 3.12 - Teil 3)
     
+     node = node->next;
+     return *this;
   }
 
-  /* POSTINCREMENT (signature distinguishes the iterators), 
-                    call:  it++, advances one element forward*/
+  /* POSTINCREMENT returns the iterator first then advances one element forward*/
   ListIterator<T> operator++(int) {
     if(nullptr == node) {
       throw "Iterator does not point to valid node";
     }
-
-    //TODO: Implement Postincrement-Operation for Iterator
-    //      (Aufgabe 3.12 - Teil 4)
-
+    else if (node->next == nullptr) {//if we reach to the end
+        ListNode<T>* firstversion = node;//to store first version
+        node = nullptr;
+        return ListIterator<T>{ firstversion };
+    }
+    else {
+        node = node->next;
+        return ListIterator<T>{ node->prev };
+    }
   }
 
 
-  /* ... */
+  /*Equality-Operation for Iterator
+   checks if iterators are refering same node */
   bool operator==(ListIterator<T> const& x) const {
-    //TODO: Implement Equality-Operation for Iterator
-    //      (Aufgabe 3.12 - Teil 5)
-    // Iterators should be the same if they refer to the same node
-    return false;
-  } // call it: == it
 
-  /* ... */
+      return (node == x.node);
+  }
+
+  /*checks if the nodes of the iterators are not equal */
   bool operator!=(ListIterator<T> const& x) const {
-    //TODO: Implement Inequality-Operation for Iterator  
-    //      (Aufgabe 3.12 - Teil 6)
-    // Reuse operator==
-    return false;
-  } // call it: != it
+
+      return !(node == x.node);
+  } 
 
   /* Advances Iterator */
   ListIterator<T> next() const {

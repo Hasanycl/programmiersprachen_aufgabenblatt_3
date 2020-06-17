@@ -26,7 +26,6 @@ ListNode<T>* get_last_pointer(List<T> const& list_to_test) {return list_to_test.
 #include "sub_tests/pop_front.test"
 #include "sub_tests/pop_back.test"
 
-//test case definitions for 
 
 //test cases for element access of list
 #include "sub_tests/front.test"
@@ -50,12 +49,10 @@ ListNode<T>* get_last_pointer(List<T> const& list_to_test) {return list_to_test.
 //test case for move constructor
 #include "sub_tests/move_constructor.test"
 
-
 //test cases for retrieving iterators
 #include "sub_tests/begin.test"
 #include "sub_tests/end.test"
 
-/*
 //iterator tests
 #include "sub_tests/iterators/operator_star.test"
 #include "sub_tests/iterators/operator_arrow.test"
