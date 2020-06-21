@@ -31,7 +31,7 @@ struct ListIterator {
   using iterator_category = std::bidirectional_iterator_tag;
 
 
-  //Dereferencing to access values
+  //returns a reference to the value of node
   T&  operator*()  const {
     if(nullptr == node) {
       throw "Iterator does not point to valid node";
@@ -41,7 +41,7 @@ struct ListIterator {
     }
   }
 
-  //Dereferencing
+  //returns a pointer to reference of nodes value
   T* operator->() const {
     if(nullptr == node) {
       throw "Iterator does not point to valid node";
@@ -52,7 +52,7 @@ struct ListIterator {
   } 
 
 
-  /* PREINCREMENT advances one element forward and returns it*/
+  // PREINCREMENT advances one element forward and returns it
   ListIterator<T>& operator++() {
     if(nullptr == node) {
       throw "Iterator does not point to valid node";
@@ -62,7 +62,7 @@ struct ListIterator {
      return *this;
   }
 
-  /* POSTINCREMENT returns the iterator first then advances one element forward*/
+  // POSTINCREMENT returns the iterator first then advances one element forward
   ListIterator<T> operator++(int) {
     if(nullptr == node) {
       throw "Iterator does not point to valid node";
@@ -157,7 +157,7 @@ public:
     }
 
 
-    //TODO: Initializer-List Konstruktor , takes the content from ini_list and puts them into the list
+    // Initializer-List Konstruktor , takes the content from ini_list and puts them into the list
    List(std::initializer_list<T> ini_list):
         size_{ 0 },
         first_{ nullptr },
@@ -231,9 +231,6 @@ public:
         }
     }
 
-
-    /* ... */
-    //TODO: member function insert (Aufgabe 3.13)
    
 
     //makes the elements of the list reverse
@@ -379,7 +376,7 @@ List<T>* reverse( List<T> const& otherList){
 // Free function to concatenate two lists together
 template<typename T>
 List<T> operator+(List<T> list, List<T> list1) {
-    List<T> result{list};//to store the result
+    List<T> result{list};   //to store the result
     for (auto element : list1) {
         result.push_back(element);
     }
