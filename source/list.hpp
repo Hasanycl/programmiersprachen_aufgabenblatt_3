@@ -146,7 +146,7 @@ public:
     }
 
 
-    /* Move-Konstruktor
+    //Move-Konstruktor
     List(List&& rhs) :
         size_{rhs.size_},
         first_{ rhs.first_ },
@@ -154,22 +154,25 @@ public:
         rhs.size_ = 0;
         rhs.first_ = nullptr;
         rhs.last_ = nullptr;
-    }*/
-
-
-    //TODO: Initializer-List Konstruktor (3.10 - Teil 1)
-    /* ... */
-    // test and implement:
-    List(std::initializer_list<T> ini_list) {
-      //not implemented yet
     }
+
+
+    //TODO: Initializer-List Konstruktor , takes the content from ini_list and puts them into the list
+   List(std::initializer_list<T> ini_list):
+        size_{ 0 },
+        first_{ nullptr },
+        last_{ nullptr }{
+           for(auto element : ini_list) {
+                this->push_back(element);
+        }
+  }
 
     //swap function
     void swap(List& otherList) {
         std::swap(size_, otherList.size_);
         std::swap(first_, otherList.first_);
         std::swap(last_, otherList.last_);
-        
+
     }
     //(unifying) Assignment operator
     List& operator=(List otherList) {
@@ -178,14 +181,14 @@ public:
     }
 
     //checks if two lists equal
-    bool operator==(List const& rhs) const{
+    bool operator==(List const& rhs) const {
 
         if (this->size_ == rhs.size_) {
             ListNode<T>* temp = first_;
             ListNode<T>* temp1 = rhs.first_;
             while (temp != nullptr && temp1 != nullptr) {
 
-               if (temp->value != temp->value) { return false; }//if values are not same
+                if (temp->value != temp->value) { return false; }//if values are not same
 
                 temp = temp->next; //move to next node
                 temp1 = temp1->next;
@@ -197,7 +200,7 @@ public:
         }
     }
 
-    bool operator!=(List const& rhs) const{
+    bool operator!=(List const& rhs) const {
         if (*this == rhs) {
             return false;
         }
@@ -207,7 +210,7 @@ public:
     /* Destructor */
     ~List() {
         clear();
-    } 
+    }
 
     /* returns an iterator to the first element of the list */
     ListIterator<T> begin() {
@@ -218,10 +221,10 @@ public:
     /* returns an iterator to element after last element */
     ListIterator<T> end() {
 
-      return ListIterator<T>{nullptr};
+        return ListIterator<T>{nullptr};
     }
 
-    /* deletes all of the elements */ 
+    /* deletes all of the elements */
     void clear() {
         while (!empty()) {
             pop_back();
@@ -231,13 +234,10 @@ public:
 
     /* ... */
     //TODO: member function insert (Aufgabe 3.13)
+   
 
-    /* ... */
-    //TODO: member function insert (Aufgabe 3.14)
-
-    
-   // makes the elements of the list reverse
-    void reverse(){
+    //makes the elements of the list reverse
+    void reverse() {
         ListNode<T>* curr = first_;//pointer curr to track current node
         ListNode<T>* temp;
         while (curr != nullptr) {
@@ -376,8 +376,15 @@ List<T>* reverse( List<T> const& otherList){
     return temp;
 }
 
-/* ... */
-//TODO: Freie Funktion operator+ (3.10 - Teil 2)
+// Free function to concatenate two lists together
+template<typename T>
+List<T> operator+(List<T> list, List<T> list1) {
+    List<T> result{list};//to store the result
+    for (auto element : list1) {
+        result.push_back(element);
+    }
+    return result;
+}
 
 
 #endif // # define BUW_LIST_HPP

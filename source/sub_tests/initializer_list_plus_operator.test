@@ -1,0 +1,21 @@
+TEST_CASE("initializer list and + operator", "[initializer_list]") {
+
+   List<int> int_list{9, 5, 38, 100};
+
+    REQUIRE(int_list.size() == 4);
+    REQUIRE(int_list.front() == 9);
+    REQUIRE(int_list.back() == 100);
+
+    auto list1 = List<int>{1, 2} + List<int>{5, 6};
+
+    REQUIRE(list1.size() == 4);
+    REQUIRE(list1.front() == 1);
+    REQUIRE(list1.back() == 6);
+
+    auto list2 = List<int>{20 , 21 , 22} +  List<int>{23 , 24 ,25};
+
+    REQUIRE(list2.front() == 20);
+    REQUIRE(list2.back() == 25);
+    REQUIRE(list2.size() == 6);
+
+} 

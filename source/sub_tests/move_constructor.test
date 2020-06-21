@@ -1,0 +1,18 @@
+
+TEST_CASE ("move constructor", "[list_move_constructor]") {
+  List<int> list;
+   list.push_front(1);
+   list.push_front(2);
+   list.push_front(3);
+   list.push_front(4);
+   List<int> list2 = std::move(list);
+   REQUIRE (0 == list.size());
+   REQUIRE (list.empty());
+   REQUIRE (4 == list2.size());
+List<int> list3 = std::move(list2);
+REQUIRE (list2.empty());
+REQUIRE (0 == list2.size());
+REQUIRE (4 == list3.size());
+
+
+}
